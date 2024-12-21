@@ -1,27 +1,14 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
     <meta charset="UTF-8" />
-    <title>change blackground</title>
-    <link rel="stylesheet" href="background.css">
-</head>
-<body>
-    <button id="changeColorButton">Click me!</button>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Change Background</title>
+    <link rel="stylesheet" href="backgroound.css" />
+  </head>
+  <body>
+    <button id="changeColor">Click me!</button>
 
-    <script>
-        // Function to generate a random hex color
-        function getRandomColor() {
-            const letters = "0123456789ABCDEF";
-            let color = "#";
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-
-        // Event listener to change background color on button click
-        document.getElementById("changeColorButton").addEventListener("click", function() {
-            document.body.style.backgroundColor = getRandomColor();
-        });
-    </script>
-</body>
+    <script src="backgroound.js"></script>
+  </body>
+</html>
