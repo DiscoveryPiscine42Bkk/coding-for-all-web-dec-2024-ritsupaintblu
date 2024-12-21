@@ -1,71 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Basic Calculator</title>
-    </head>
-    <body>
-        <h1>It's over 9000 Calculator</h1>
-        <input type="text" id="leftOperand" placeholder="Left number">
-        <select id="operator">
-            <option value="+">+</option>
-            <option value="-">-</option>
-            <option value="*">*</option>
-            <option value="/">/</option>
-            <option value="%">%</option>
-        </select>
-        <input type="text" id="rightOperand" placeholder="Right number">
-        <button onclick="calculate()">Try me!</button>
-        
-        <script>
-            function calculate() {
-                const leftOperand = document.getElementById('leftOperand').value;
-                const rightOperand = document.getElementById('rightOperand').value;
-                const operator = document.getElementById('operator').value;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>It's over 9000</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      input {
+        width: 100px;
+        padding: 8px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      select {
+        padding: 8px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        padding-block: 8px;
+        padding-inline: 15px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f0f0f0;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>It's over 9000!</h1>
+    <input type="text" id="left" placeholder="Left" />
+    <select id="operator">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+      <option value="%">%</option>
+    </select>
+    <input type="text" id="right" placeholder="Right" />
+    <button id="calc">Try me!</button>
+    <script>
+      const logAlert = (msg) => {
+        alert(msg);
+        console.log(msg);
+      };
 
-                if (!isPositiveInteger(leftOperand) || !isPositiveInteger(rightOperand)) {
-                    alert("Error :(");
-                    console.error("Error :(");
-                    return;
-                }
+      function calculate() {
+        const left = parseInt(document.getElementById("left").value);
+        const right = parseInt(document.getElementById("right").value);
+        const operator = document.getElementById("operator").value;
 
-                const num1 = parseInt(leftOperand);
-                const num2 = parseInt(rightOperand);
-                let result;
+        if (left < 0 || right < 0 || isNaN(left) || isNaN(right)) {
+          logAlert("Error :(");
+          return;
+        }
 
-                try {
-                    switch (operator) {
-                        case '+': result = num1 + num2; break;
-                        case '-': result = num1 - num2; break;
-                        case '*': result = num1 * num2; break;
-                        case '/':
-                        case '%':
-                            if (num2 === 0) {
-                                alert("It's over 9000!");
-                                console.error("It's over 9000!");
-                                return;
-                            }
-                            result = operator === '/' ? num1 / num2 : num1 % num2;
-                            break;
-                        default: throw new Error("Invalid Operator");
-                    }
-
-                    alert(`Result: ${result}`);
-                    console.log(`Result: ${result}`);
-                } catch (e) {
-                    alert("Error :(");
-                    console.error("Error :(");
-                }
+        let result;
+        switch (operator) {
+          case "+":
+            result = left + right;
+            break;
+          case "-":
+            result = left - right;
+            break;
+          case "*":
+            result = left * right;
+            break;
+          case "/":
+          case "%":
+            if (right === 0) {
+              logAlert("It's over 9000!");
+              return;
             }
+            result = operator === "/" ? left / right : left % right;
+            break;
+          default:
+            logAlert("Error :(");
+            return;
+        }
 
-            function isPositiveInteger(value) {
-                return /^\d+$/.test(value);
-            }
+        logAlert(`Result: ${result}`);
+      }
 
-            setInterval(() => {
-                alert("Please, use me...");
-            }, 30000);
-        </script>
-    </body>
+      document.getElementById("calc").addEventListener("click", calculate);
+
+      setInterval(() => {
+        alert("Please, use me...");
+      }, 30 * 1000);
+    </script>
+  </body>
 </html>
